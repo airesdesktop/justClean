@@ -1,25 +1,46 @@
 #!/bin/bash
-# justClean | version a0.1
+
+# |||||||||||||||||||||||||||| justClean | version a0.1 |||||||||||||||||||||||||||||||||
+# =======================================================================================
+# just a silly stupid and small (3 characteristics!) .sh program
+# for cleaning MY (my specificly) desktop (NixOS) setup (I'm using to many parenthesis).
+#
+# (btw, you'll notice I pretty-fied this code too much for it's good... I just like being organized uhh, leave me alone.)
+# =======================================================================================
 
 end_program() {
+
     echo "Ending program..."
+    
 }
 
-echo "Removing bash history..."
+clean_bash_history() {
 
-if [ -f "/home/$USER/.bash_history" ]; then
+    echo "Removing bash history..."
 
-  sudo rm /home/$USER/.bash_history
+    if [ -f "/home/$USER/.bash_history" ];
+    then sudo rm /home/$USER/.bash_history
+    else echo "Bash history file does not exist! Ignoring..."
+    fi
 
-else
+}
 
-  echo "File does not exist! Ignoring..."
+clean_bambu_downloads() {
 
-fi
+    echo "Removing temporary Bambu Studio files..."
 
-echo "Removing temporary Bambu Studio files..."
+    sudo rm -rf /home/$USER/Downloads/.bambuDownloads
+    sudo mkdir -p /home/$USER/Downloads/.bambuDownloads
 
-sudo rm -rf /home/$USER/Downloads/.bambuDownloads
-sudo mkdir -p /home/$USER/Downloads/.bambuDownloads
+}
 
-end_program
+automatic_mode() {
+
+    echo "Starting automatic_mode cleaning chain..."
+    clean_bambu_downloads
+    clean_bash_history
+    end_program
+
+}
+
+automatic_mode
