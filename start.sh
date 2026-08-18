@@ -19,7 +19,7 @@ clean_bash_history() {
     echo "Removing bash history..."
 
     if [ -f "/home/$USER/.bash_history" ];
-    then sudo rm /home/$USER/.bash_history
+    then rm /home/$USER/.bash_history
     else echo "Bash history file does not exist! Ignoring..."
     fi
 
@@ -29,8 +29,8 @@ clean_bambu_downloads() {
 
     echo "Removing temporary Bambu Studio files..."
 
-    sudo rm -rf /home/$USER/Downloads/.bambuDownloads
-    sudo mkdir -p /home/$USER/Downloads/.bambuDownloads
+    rm -rf /home/$USER/Downloads/.bambuDownloads
+    mkdir -p /home/$USER/Downloads/.bambuDownloads
 
 }
 
@@ -38,7 +38,7 @@ clean_tmp_folder() {
 
     echo "Removing temporary files older than 7 days (a week)..."
 
-    sudo find /tmp -type f -atime +7 -delete
+    find /tmp -type f -atime +7 -delete
 
 }
 
@@ -55,18 +55,27 @@ clean_cache_folder() {
     echo "Cleaning .cache content older that 7 days (a week)..."
 
     find ~/.cache/ -depth -type f -atime +7
-    
+
 }
 
 automatic_mode() {
 
     echo "Starting automatic_mode cleaning chain..."
 
-    clean_bambu_downloads
     clean_bash_history
     clean_tmp_folder
+    clean_thumbs_folder
+    clean_cache_folder
+    clean_bambu_downloads
     end_program
 
 }
 
-automatic_mode
+echo "For now all this does is clean predefined folders and files... so be aware, as these are the things it's gonna clean:"
+echo "Bash history"
+echo ".tmp Folder"
+echo ".thumbs Folder"
+echo ".cache Folder"
+echo "Also a predefined bambu studio downloads folder i have (i hate bambu studio btw), tho it's location has to be set as '~/Downloads/.bambudownloads'..."
+
+sudo automatic_mode
