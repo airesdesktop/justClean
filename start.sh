@@ -50,10 +50,18 @@ clean_thumbs_folder() {
 
 }
 
+clean_cache_folder() {
+
+    echo "Cleaning .cache content older that 7 days (a week)..."
+
+    find ~/.cache/ -depth -type f -atime +7
+    
+}
+
 automatic_mode() {
 
     echo "Starting automatic_mode cleaning chain..."
-    
+
     clean_bambu_downloads
     clean_bash_history
     clean_tmp_folder
