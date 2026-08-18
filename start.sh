@@ -42,9 +42,18 @@ clean_tmp_folder() {
 
 }
 
+clean_thumbs_folder() {
+    
+    echo "Removing .thumbs content..."
+
+    rm -rf ~/.thumbs/*
+
+}
+
 automatic_mode() {
 
     echo "Starting automatic_mode cleaning chain..."
+    
     clean_bambu_downloads
     clean_bash_history
     clean_tmp_folder
