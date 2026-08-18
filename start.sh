@@ -34,11 +34,20 @@ clean_bambu_downloads() {
 
 }
 
+clean_tmp_folder() {
+
+    echo "Removing temporary files older than 7 days (a week)..."
+
+    sudo find /tmp -type f -atime +7 -delete
+
+}
+
 automatic_mode() {
 
     echo "Starting automatic_mode cleaning chain..."
     clean_bambu_downloads
     clean_bash_history
+    clean_tmp_folder
     end_program
 
 }
